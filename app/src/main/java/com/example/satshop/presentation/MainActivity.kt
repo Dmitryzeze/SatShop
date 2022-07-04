@@ -1,4 +1,4 @@
- package com.example.satshop.Presentation
+ package com.example.satshop.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
