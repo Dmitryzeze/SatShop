@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SatShop</string>
+    <string name="add_button_text">Add new shop item</string>
 </resources>
