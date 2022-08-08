@@ -1,6 +1,5 @@
 package com.example.satshop.presentation
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.satshop.data.ShopListRepositoryImpl
 import com.example.satshop.domain.*
