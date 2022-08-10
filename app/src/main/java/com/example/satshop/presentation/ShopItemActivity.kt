@@ -6,7 +6,6 @@ import com.example.satshop.R
 
 class ShopItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_item)
     }

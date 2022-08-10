@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.satshop.data.ShopListRepositoryImpl
 import com.example.satshop.domain.*
 
-class MainViewModel : ViewModel() {
+class  MainViewModel : ViewModel() {
     private val repository = ShopListRepositoryImpl
     private val addShopItemUseCase = AddShopItemUseCase(repository)
     private val getShopItemUseCase = GetShopItemUseCase(repository)
