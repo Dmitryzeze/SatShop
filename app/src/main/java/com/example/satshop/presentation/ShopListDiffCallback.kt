@@ -23,5 +23,6 @@ class ShopListDiffCallback (
         val oldItem = oldList[oldItemPosition]
         val newItem = newList[newItemPosition]
         return oldItem == newItem
+
     }
 }
