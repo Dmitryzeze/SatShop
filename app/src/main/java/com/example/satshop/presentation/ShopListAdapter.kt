@@ -3,7 +3,6 @@ package com.example.satshop.presentation
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.satshop.R
-import com.example.satshop.data.ShopListRepositoryImpl.getShopItem
 import com.example.satshop.domain.ShopItem
 
 class ShopListAdapter : androidx.recyclerview.widget.ListAdapter<ShopItem, ShopItemViewHolder>(ShopItemDiffCallback()) {
@@ -30,7 +29,7 @@ class ShopListAdapter : androidx.recyclerview.widget.ListAdapter<ShopItem, ShopI
     }
 
     override fun getItemViewType(position: Int): Int {
-        val shopItem = getShopItem(position)
+        val shopItem = getItem(position)
         return if (shopItem.enabled)
             VIEW_TYPE_ENABLE
         else VIEW_TYPE_DISABLE
@@ -38,7 +37,7 @@ class ShopListAdapter : androidx.recyclerview.widget.ListAdapter<ShopItem, ShopI
     }
 
     override fun onBindViewHolder(holder: ShopItemViewHolder, position: Int) {
-        val shopItem = getShopItem(position)
+        val shopItem = getItem(position)
 
         holder.tvCount.text = shopItem.count.toString()
         holder.tvName.text = shopItem.name
