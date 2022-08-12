@@ -1,13 +1,15 @@
 package com.example.satshop.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.satshop.R
-
+import com.example.satshop.presentation.ShopItemActivity.Companion.newIntentAddMode
+import com.example.satshop.presentation.ShopItemActivity.Companion.newIntentEditMode
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +24,11 @@ class MainActivity : AppCompatActivity() {
         viewModel.shopList.observe(this) {
             Log.d("ssss", "$it")
             shopListAdapter.submitList(it)
+        }
+        val buttonAddItem = findViewById<FloatingActionButton>(R.id.button_add_shop_item)
+        buttonAddItem.setOnClickListener {
+            val intent = newIntentAddMode(this)
+            startActivity(intent)
         }
 
     }
@@ -78,7 +85,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupClickListener() {
         shopListAdapter.onShopItemClickListener = {
-            Log.d("testClick", it.toString())
+            val intent = newIntentEditMode(this, it.id)
+            startActivity(intent)
         }
     }
 }
