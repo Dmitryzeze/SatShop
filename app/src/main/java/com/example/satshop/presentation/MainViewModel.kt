@@ -5,6 +5,7 @@ import com.example.satshop.data.ShopListRepositoryImpl
 import com.example.satshop.domain.*
 
 class MainViewModel : ViewModel() {
+
     private val repository = ShopListRepositoryImpl
     private val addShopItemUseCase = AddShopItemUseCase(repository)
     private val getShopItemUseCase = GetShopItemUseCase(repository)
@@ -22,9 +23,11 @@ class MainViewModel : ViewModel() {
 
     }
 
+
     fun editShopItem(shopItem: ShopItem) {
         val newShopItem = shopItem.copy(enabled = !shopItem.enabled)
         editShopItemUseCase.editShopItem(newShopItem)
 
     }
+
 }
