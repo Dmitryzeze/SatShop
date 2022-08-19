@@ -23,18 +23,18 @@ class ShopItemViewModel : ViewModel() {
     val errorInputCount: LiveData<Boolean>
         get() = _errorInputCount
 
+    private val _shouldCloseScreen = MutableLiveData<Unit>()
+    val shouldCloseScreen: LiveData<Unit>
+        get() = _shouldCloseScreen
+
     private val _shopItem = MutableLiveData<ShopItem>()
-    val shopItem : LiveData<ShopItem>
+    val shopItem: LiveData<ShopItem>
         get() = _shopItem
 
     fun getShopItem(shopItemId: Int) {
         val item = getShopItemUseCase.getShopItem(shopItemId)
         _shopItem.value = item
     }
-
-    private val _shouldCloseScreen = MutableLiveData<Unit>()
-    val shouldCloseScreen: LiveData<Unit>
-        get() = _shouldCloseScreen
 
     fun addShopItem(inputName: String?, inputCount: String?) {
         val name = parseName(inputName)
@@ -45,7 +45,6 @@ class ShopItemViewModel : ViewModel() {
             addShopItemUseCase.addShopItem(shopItem)
             finishWork()
         }
-
     }
 
     fun editShopItem(inputName: String?, inputCount: String?) {
@@ -54,14 +53,11 @@ class ShopItemViewModel : ViewModel() {
         val fieldsValid = validateInput(name, count)
         if (fieldsValid) {
             _shopItem.value?.let {
-                val item= it.copy(name=name,count = count)
+                val item = it.copy(name = name, count = count)
                 editShopItemUseCase.editShopItem(item)
                 finishWork()
             }
-
-
         }
-
     }
 
     private fun parseName(inputName: String?): String {
@@ -71,14 +67,12 @@ class ShopItemViewModel : ViewModel() {
     private fun parseCount(inputCount: String?): Int {
         return try {
             inputCount?.trim()?.toInt() ?: 0
-
         } catch (e: Exception) {
             0
         }
     }
 
     private fun validateInput(name: String, count: Int): Boolean {
-        var result = true
         if (name.isBlank()) {
             _errorInputName.value = true
             return false
@@ -90,13 +84,15 @@ class ShopItemViewModel : ViewModel() {
         return true
     }
 
-    public fun resetErrorInputName() {
+    fun resetErrorInputName() {
         _errorInputName.value = false
     }
-    public fun resetErrorInputCount() {
+
+    fun resetErrorInputCount() {
         _errorInputCount.value = false
     }
-    private fun finishWork(){
+
+    private fun finishWork() {
         _shouldCloseScreen.value = Unit
     }
 }

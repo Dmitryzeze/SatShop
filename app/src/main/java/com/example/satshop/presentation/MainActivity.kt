@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     private fun setupRecyclerView() {
         val rvShopList = findViewById<RecyclerView>(R.id.rv_shop_list)
         shopListAdapter = ShopListAdapter()
@@ -70,7 +69,6 @@ class MainActivity : AppCompatActivity() {
                 val item = shopListAdapter.currentList[viewHolder.adapterPosition]
                 viewModel.deleteShopItem(item)
             }
-
 
         }
         val itemTouchHelper = ItemTouchHelper(callback)
