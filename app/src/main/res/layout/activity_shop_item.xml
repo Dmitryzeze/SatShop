@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/shop_item_container"
-    android:name="com.example.satshop.presentation.ShopItemFragment"
     tools:layout="@layout/fragment_shop_item"
     >
 
