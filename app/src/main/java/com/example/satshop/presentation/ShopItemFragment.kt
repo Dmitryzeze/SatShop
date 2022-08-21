@@ -3,6 +3,7 @@ package com.example.satshop.presentation
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +15,7 @@ import com.example.satshop.R
 import com.example.satshop.domain.ShopItem
 import com.google.android.material.textfield.TextInputLayout
 
-class ShopItemFragment(
-    private val screenMode: String = MODE_UNKNOWN,
-    private val shopItemId: Int = ShopItem.UNDEFINED_ID
-) : Fragment() {
+class ShopItemFragment : Fragment() {
     private lateinit var viewModel: ShopItemViewModel
 
     private lateinit var tilName: TextInputLayout
@@ -25,6 +23,9 @@ class ShopItemFragment(
     private lateinit var etName: EditText
     private lateinit var etCount: EditText
     private lateinit var buttonSave: Button
+
+    private var screenMode: String = MODE_UNKNOWN
+    private var shopItemId: Int = ShopItem.UNDEFINED_ID
 
 
     override fun onCreateView(
@@ -119,11 +120,21 @@ class ShopItemFragment(
     }
 
     private fun parseParam() {
-        if (screenMode != MODE_EDIT && screenMode != MODE_ADD) {
+val args = requireArguments()
+        if (!args.containsKey(EXTRA_SCREEN_MODE)) {
             throw RuntimeException("Param screen mode is absent")
         }
-        if (screenMode == MODE_EDIT && shopItemId == ShopItem.UNDEFINED_ID) {
-            throw RuntimeException("Param shop item id is absent")
+        val mode = args.getString(EXTRA_SCREEN_MODE)
+        if (mode != MODE_EDIT && mode != MODE_ADD) {
+            throw RuntimeException("Unknown screen mode $mode")
+        }
+        screenMode = mode
+        if (screenMode == MODE_EDIT) {
+            if (!args.containsKey(EXTRA_SHOP_ITEM_ID)) {
+                throw RuntimeException("Param shop item id is absent")
+            }
+            shopItemId = args.getInt(EXTRA_SHOP_ITEM_ID, ShopItem.UNDEFINED_ID)
+            Log.d("intId","$shopItemId")
         }
     }
 
@@ -144,11 +155,20 @@ class ShopItemFragment(
         private const val MODE_UNKNOWN = ""
         fun newInstanceAddItem()
                 : ShopItemFragment {
-            return ShopItemFragment((MODE_ADD))
+            val args = Bundle().apply {
+                putString(EXTRA_SCREEN_MODE, MODE_ADD)
+            }
+            return ShopItemFragment().apply { arguments = args }
         }
+
         fun newInstanceEditItem(shopItemId: Int)
                 : ShopItemFragment {
-            return ShopItemFragment((MODE_EDIT),shopItemId)
+            return ShopItemFragment().apply {
+                arguments = Bundle().apply {
+                    putString(EXTRA_SCREEN_MODE, MODE_EDIT)
+                    putInt(EXTRA_SHOP_ITEM_ID, shopItemId)
+                }
+            }
         }
     }
 
