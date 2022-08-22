@@ -1,5 +1,6 @@
 package com.example.satshop.presentation
 
+
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -17,7 +18,7 @@ import com.google.android.material.textfield.TextInputLayout
 
 class ShopItemFragment : Fragment() {
     private lateinit var viewModel: ShopItemViewModel
-
+    private lateinit var onEditingFinishedListener : OnEditingFinishedListener
     private lateinit var tilName: TextInputLayout
     private lateinit var tilCount: TextInputLayout
     private lateinit var etName: EditText
@@ -26,7 +27,6 @@ class ShopItemFragment : Fragment() {
 
     private var screenMode: String = MODE_UNKNOWN
     private var shopItemId: Int = ShopItem.UNDEFINED_ID
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,7 +66,7 @@ class ShopItemFragment : Fragment() {
             tilName.error = message
         }
         viewModel.shouldCloseScreen.observe(viewLifecycleOwner) {
-            activity?.onBackPressed()
+            (requireActivity() as OnEditingFinishedListener ).onEditingFinished()
         }
     }
 
@@ -146,7 +146,9 @@ val args = requireArguments()
         etCount = view.findViewById(R.id.et_count)
         buttonSave = view.findViewById(R.id.save_button)
     }
-
+    interface OnEditingFinishedListener{
+        fun onEditingFinished()
+    }
     companion object {
         private const val EXTRA_SCREEN_MODE = "extra_mode"
         private const val EXTRA_SHOP_ITEM_ID = "extra_shop_item_id"
