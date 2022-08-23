@@ -7,10 +7,13 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.174" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.174" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.174" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
+        <entry key="app/src/main/res/layout-land/activity_main.xml" value="0.11875" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_shop_item.xml" value="0.360054347826087" />
+        <entry key="app/src/main/res/layout/fragment_shop_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_shop_disable.xml" value="0.26266464032421477" />
         <entry key="app/src/main/res/layout/item_shop_enable.xml" value="0.26266464032421477" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.216" />
       </map>
     </option>
   </component>
