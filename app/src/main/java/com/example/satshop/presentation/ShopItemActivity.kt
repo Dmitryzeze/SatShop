@@ -16,8 +16,8 @@ class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinished
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_item)
         parseIntent()
-        if(savedInstanceState==null)
-        lodeRightMode()
+        if(savedInstanceState==null){
+        lodeRightMode()}
     }
 
     private fun lodeRightMode() {
